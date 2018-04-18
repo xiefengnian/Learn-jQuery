@@ -58,7 +58,7 @@ js: $(".d1").attr("data-index","0")
 
 +当传入两个参数的时候，给选择器选中的元素设置属性，第一个为属性名，第二个为属性值。
 
-`html: <div class="d1" <font color=red>data-index="0"></font></div>`
+`html: <div class="d1" data-index="0"></div>`
 这时候就给html添加上了`data-index`属性，值为`"0"`
 
 +当传入一个参数的时候，是获取一个标签的属性值，接着上面的html
