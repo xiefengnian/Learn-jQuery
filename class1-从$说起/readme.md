@@ -55,9 +55,13 @@ String|Number|Function|Object|undefined...
 $(this)
 ```
 这种方式以后再讨论，现在我们探讨下一个问题。
+<<<<<<< HEAD
 
 ## 点语法、链式语法  
    
+=======
+## 点语法、链式语法
+>>>>>>> 6aa5f42eedc6d98b34e2cd4965a0b303262135ab
 在JQ中，有个很显著的特点是什么呢？
 就是JQ可以用这样的方式操作DOM：
 ```
