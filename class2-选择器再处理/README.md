@@ -57,10 +57,12 @@ js: $(".d1").attr("data-index","0")
 ```
 
 +当传入两个参数的时候，给选择器选中的元素设置属性，第一个为属性名，第二个为属性值。
+
 `html: <div class="d1" <font color=red>data-index="0"></font></div>`
 这时候就给html添加上了`data-index`属性，值为`"0"`
 
 +当传入一个参数的时候，是获取一个标签的属性值，接着上面的html
+
 `js: $(".d1").attr("data-index")`结果为：`"0"`
 
 要实现这个方法，我们至少需要注意以下几个问题：
@@ -78,6 +80,7 @@ this.attr = function(){
 **等等！好像缺点什么？**
 我们怎么去判断参数的数量呢？
 在这里，其实很简单，使用函数内部的关键字arguments。
+
 arguments是一个类数组结构（这一点和HTMLCollection很像），使用下标的方式访问，并且，**具有length属性**。
 所以在函数内部，`auguments.length`就代表了参数的长度
 
@@ -109,14 +112,19 @@ $('.d1').attr("data-index","0");
 `
 
 以上代码在calss选择器上是可以运行的，因为this.dom是HTMLCollection，可以使用下标去访问其中的元素，但是**如果this.dom**在id选择器下呢？再用一下：
+
 `
 $('#d1').attr("data-index","0");
 `
+
 <font color=red>(x)Uncaught TypeError: Cannot read property 'setAttribute' of undefined</font>
 
 为什么会报这个错呢，因为这时候this.dom为一个HTMLElement对象，当你尝试使用下标去访问的时候：
+
 `this.dom[0] ==> undefined`
+
 那么再使用链式语法的时候，undefined这个值当然是没有setAttribute这个方法的，所以报了一个错：
+
 <font color=red>(x)未捕捉类型错误：不能读取undefined的'setAttribute属性'</font>
 
 
@@ -167,7 +175,7 @@ this.attr = function(){
 
 说实话这个代码我写起来已经有点不开心了，因为这个问题虽然解决的，但是我们在接下来的实现的各个方法中，都要再写一次这个流程，比如css、remove等方法。重复写，没有必要，我们不如先简单预先处理一下。
 
-## 数据方法介绍
+## 数组方法介绍
 我们先介绍一个数组的方法,`forEach`
 >forEach([callback])
 >传入一个回调函数，处理数组里的每一项。
