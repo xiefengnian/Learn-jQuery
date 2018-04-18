@@ -22,9 +22,9 @@ JQ作为很多人的第一个类库（或者说框架），给新手的冲击力
 
 ```
 html：
-		<div class="d1"></div>
+	<div class="d1"></div>
 js：
-		$('.d1').remove();
+	$('.d1').remove();
 \\ 这个代码的含义是删除dom中class="d1"的元素
 ```
 
