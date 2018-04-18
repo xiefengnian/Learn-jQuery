@@ -7,7 +7,7 @@ var init = function(selector){
     //选择器
 }
 var $ = function(selector){
-	return new init(selector);
+    return new init(selector);
 }
 ```
 当我们执行一个经典的JQ语句之后，是这样的：
@@ -18,15 +18,21 @@ var $ = function(selector){
 }
 `
 这样看起来不错，因为我们选择器返回的结果是对象的话，接下来我们就能使用第一节说的点语法了。
+
 但是现在也要回忆一下我们存在的问题：
+
 **id选择器返回的是HTMLElement对象**
+
 （实际上，比如是div标签，则会返回HTMLDivElement，span标签返回HTMLSpanElement对象，但是相同点是都继承自HTMLElement对象的，都包含了一些相同的属性，以下没有说明的话，都使用HTMLElement对象表示）
+
 **而class选择器返回的是HTMLCollection对象**
+
 （HTMLCollection对象是一个类似数组的结构，有下标和length属性，但是不携带数组的任何方法，HTMLCollection里面的每一项都是选择器选中的HTMLElement对象）
 就是这个意思，以下都是伪代码，意思懂了就好：
+
 ```
 HTMLElement{
-	style : {},
+    style : {},
     onclick : f,
     ...
 }
@@ -66,7 +72,7 @@ js: $(".d1").attr("data-index","0")
 //在init构造器中实现这个方法
 
 this.attr = function(){
-	//将要实现些什么
+    //将要实现些什么
 }
 ```
 **等等！好像缺点什么？**
@@ -81,17 +87,17 @@ arguments是一个类数组结构（这一点和HTMLCollection很像），使用
 ```
 //在class选择器下，this.dom 为[]
 this.attr = function(){
-	var argLength = arguments.length;
+    var argLength = arguments.length;
     if(argLength == 1){
     	var key = arguments[0];
         for(var i = 0 ; i < this.dom.length ; i++){
-        	console.log(this.dom[i].getAttribute(key));
+            console.log(this.dom[i].getAttribute(key));
         }
     } else if(argLength == 2){
     	var key = arguments[0];
         var value = arguments[1];
         for(var i = 0 ; i < this.dom.length ; i++){
-        	this.dom[i].setAttribute(key,value);
+            this.dom[i].setAttribute(key,value);
         }
     }
 }
@@ -117,39 +123,42 @@ $('#d1').attr("data-index","0");
 那怎么办呢？我们只能判断一下this.dom的类型，然后区分不同的情况了。
 怎么区分呢？最简单的你可能会想到：
 `typeof this.dom == 'object'`
+
 `typeof this.dom == 'array'`
+
 通过typeof关键字来判断数据类型，但是真的可行吗？
 `typeof [] ==> 'object'`
 你可以在控制台输出一下，数组的类型是`'object'`。
+
 那怎么办？
 很简单，HTMLCollection有一个特别的属性：`length`。
 所以我们就可以这样写：
 ```
 this.attr = function(){
-	var argLength = arguments.length;
+    var argLength = arguments.length;
     if(this.dom.length){
     	//这里就是HTMLCollection情况啦，原来的代码复制粘贴就好了
         if(argLength == 1){
     		var key = arguments[0];
         	for(var i = 0 ; i < this.dom.length ; i++){
-        		console.log(this.dom[i].getAttribute(key));
+        	    console.log(this.dom[i].getAttribute(key));
         	}
     	} else if(argLength == 2){
-    		var key = arguments[0];
+    	    var key = arguments[0];
             var value = arguments[1];
             for(var i = 0 ; i < this.dom.length ; i++){
-        		this.dom[i].setAttribute(key,value);
-        	}
+        	    this.dom[i].setAttribute(key,value);
+            }
     	}
     } else {
     	//这里是HTMLElement情况，这里就比较简单了
         if(argLength == 1){
             var key = arguments[0];
-        	return this.dom.getAttribute(key);
+            return this.dom.getAttribute(key);
         }else if(argLength == 2){
             var key = arguments[0];
             var value = arguments[1];
-        	this.dom.setAttribute(key,value);
+            this.dom.setAttribute(key,value);
         }
     }
 }
@@ -228,8 +237,8 @@ Array.prototype.forEach.call(dom,function(item){
 这是JS中一个特别有意思的地方：每一个函数都具备一个call方法，这个方法的作用是什么呢？我们用个小例子探究一下。
 ```
 var xm = {
-	age : 20,
-	say : function(){
+    age : 20,
+    say : function(){
     	console.log(this.age);
     }
 }
@@ -258,7 +267,7 @@ xm.say.call(this,"一个字符串");  //=>40 "一个字符串"
 ```
 var dom = document.getElementsByClassName(selector);
 Array.prototype.forEach.call(dom,function(item){
-	this.dom.push(item);
+    this.dom.push(item);
 })
 ```
 这个代码就是调用（呼唤）数组的forEach方法，用dom“假装”一个数组，然后后面的函数回调就是原本`forEach(callback)`中需要的回调参数。
@@ -339,7 +348,7 @@ var init = function(selector){
                 console.log(item.getAttribute(key));
             })
         } else if(argLength == 2){
-        	var key = arguments[0];
+            var key = arguments[0];
             var value = arguments[1];
             this.dom.forEach(function(item){
                 item.setAttribute(key,value);
@@ -348,7 +357,7 @@ var init = function(selector){
     }
 }
 var $ = function(selector){
-	return new init(selector);
+    return new init(selector);
 }
 ```
 这时：
@@ -358,13 +367,15 @@ $('.d1')
 结果为：
 ```
 init{
-	dom:[...],
+    dom:[...],
     attr : f ,
     __proto__ : Object
 }
 ```
 我们为init方法实现了一个属性：dom，
+
 一个方法：attr
+
 下一节，我们将实现css方法，和点语法。
 
 
