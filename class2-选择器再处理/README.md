@@ -205,14 +205,15 @@ var init = function(selector){
     //省略removeStringFirst函数...
 
     this.dom = [];
+    var me = this;
     var firstChar = selector[0];    //获取首字符
     if(firstChar == '.'){           //实现class选择器
     	selector = removeStringFirst(selector);
     	var dom = document.getElementsByClassName(selector);
         Array.prototype.forEach.call(dom,function(item){
-        	this.dom.push(item);
+        	me.dom.push(item);
         })
-        console.log(this.dom)
+        console.log(me.dom)
     }
     else if(firstChar == '#'){       //实现id选择器
     	selector = removeStringFirst(selector);
@@ -222,9 +223,9 @@ var init = function(selector){
     else {                           //实现标签选择器
         var dom = document.getElementsByTagName(selector);
         Array.prototype.forEach.call(dom,function(item){
-        	this.dom.push(item);
+        	me.dom.push(item);
         })
-        console.log(this.dom);
+        console.log(me.dom);
     }
 }
 var $ = function(selector){
@@ -239,7 +240,7 @@ var $ = function(selector){
 //谜一样的代码
 var dom = document.getElementsByClassName(selector);
 Array.prototype.forEach.call(dom,function(item){
-	this.dom.push(item);
+	me.dom.push(item);
 })
 ```
 这是JS中一个特别有意思的地方：每一个函数都具备一个call方法，这个方法的作用是什么呢？我们用个小例子探究一下。
@@ -275,7 +276,7 @@ xm.say.call(this,"一个字符串");  //=>40 "一个字符串"
 ```
 var dom = document.getElementsByClassName(selector);
 Array.prototype.forEach.call(dom,function(item){
-    this.dom.push(item);
+    me.dom.push(item);
 })
 ```
 这个代码就是调用（呼唤）数组的forEach方法，用dom“假装”一个数组，然后后面的函数回调就是原本`forEach(callback)`中需要的回调参数。
@@ -326,12 +327,13 @@ var init = function(selector){
 
     //this.dom初始化为数组，带有数组全部方法
     this.dom = [];
+    var me = this;
     var firstChar = selector[0];    //获取首字符
     if(firstChar == '.'){           //实现class选择器
     	selector = removeStringFirst(selector);
     	var dom = document.getElementsByClassName(selector);
         Array.prototype.forEach.call(dom,function(item){
-        	this.dom.push(item);
+        	me.dom.push(item);
         })
         console.log(this.dom)
     }
@@ -343,7 +345,7 @@ var init = function(selector){
     else {                           //实现标签选择器
         var dom = document.getElementsByTagName(selector);
         Array.prototype.forEach.call(dom,function(item){
-        	this.dom.push(item);
+        	me.dom.push(item);
         })
         console.log(this.dom);
     }
@@ -385,8 +387,3 @@ init{
 一个方法：attr
 
 下一节，我们将实现监听器方法，和链式语法。
-
-
-
-
-

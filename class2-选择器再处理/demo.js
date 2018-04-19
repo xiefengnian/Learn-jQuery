@@ -8,12 +8,13 @@ var init = function(selector){
 
     //this.dom初始化为数组，带有数组全部方法
     this.dom = [];
+    var me = this; //使用本地变量捕捉this作用域，否则在call方法中会丢失init对象的this
     var firstChar = selector[0];    //获取首字符
     if(firstChar == '.'){           //实现class选择器
     	selector = removeStringFirst(selector);
     	var dom = document.getElementsByClassName(selector);
         Array.prototype.forEach.call(dom,function(item){
-        	this.dom.push(item);
+        	me.dom.push(item);
         })
         console.log(this.dom)
     }
@@ -25,7 +26,7 @@ var init = function(selector){
     else {                           //实现标签选择器
         var dom = document.getElementsByTagName(selector);
         Array.prototype.forEach.call(dom,function(item){
-        	this.dom.push(item);
+        	me.dom.push(item);
         })
         console.log(this.dom);
     }
