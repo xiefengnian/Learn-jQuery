@@ -296,3 +296,15 @@ var $ = function(selector){
     return new init(selector);
 }
 ```
+
+## 整体代码
+查看demo.js
+
+## Next class todo
+实现JQ的二次选择方法：
+
+`$(".d1").eq()`和
+
+`$(".d1").get()`以及回调中的
+
+`$(this)`
