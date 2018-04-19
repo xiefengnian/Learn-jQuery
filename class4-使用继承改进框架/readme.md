@@ -301,10 +301,16 @@ var $ = function(selector){
 查看demo.js
 
 ## Next class todo
-实现JQ的二次选择方法：
+1. 实现JQ的获取某一元素选择方法：
 
 `$(".d1").eq()`和
 
-`$(".d1").get()`以及回调中的
+`$(".d1").get()`
+2. 实现父和子选择器：
+`$(".d1").parents([selector])`
+
+`$(".d1").childrens([selector])`
+
+以及回调中的
 
 `$(this)`
