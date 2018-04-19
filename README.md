@@ -13,6 +13,8 @@ JS是一门很简单的语言，又有很多成熟的开发框架，在很多时
 >从jQuery的基础：选择器开始说起，使用JS的构造器等概念去实现一个jQuery的基础选择器。本课实现了jQuery选择器的主体框架。
 2. 选择器再处理
 >本课提出了上节课中提出的问题，并且采用了一些不错的方法去优化它（对原生选择器的结果进行一个预处理），使程序的拓展更为简易。本节充分利用了JS这门语言的一些特性，也探究了JS这门语言的原生就够，我认为是较为值得一读的一篇。
+3. 监听器和链式语法
+>我们实现了JQ的`on`方法，然后讲解了链式调用的实现原理。最后改写了attr方法和on方法，使之可以满足实现链式调用的条件。
 
 #### can u translate?
 I want to translate this pages to English(because I also learn others course which is writed by English , I want to contribute my course back to the world),but i'm pool at English,so i'm searching someone who can do this,if you are good at English and JS and also
