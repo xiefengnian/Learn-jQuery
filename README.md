@@ -21,6 +21,11 @@ JS是一门很简单的语言，又有很多成熟的开发框架，在很多时
 4. 使用继承改进框架
 >将我们之前实现的成果中使用的封装、多态等概念提出来，然后接下来使用继承的知识来优化此框架。本课介绍了JS中两种实现继承的方式，也探讨的JS语言本身的继承实现。
 
+#### todo（未完成）
+
+5. 实现父子元素二次选择
+>HTML是典型的树形结构，向上寻找父元素比较简单，是一个线型的结构；但是向下寻找子元素就避免不了对子树的遍历，这里就涉及到了《数据结构》中的递归树遍历问题。本问题也是JS学习者接触数据结构的一个契机。
+
 #### can u translate?
 I want to translate this pages to English(because I also learn others course which is writed by English , I want to contribute my course back to the world),but i'm pool at English,so i'm searching someone who can do this,if you are good at English and JS and also
 intested on this,you can link me by email :
